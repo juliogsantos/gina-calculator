@@ -1,0 +1,38 @@
+[
+	{
+	"id" : 1,
+	"produto" : "Salgado",
+	"imagem" : "salgado.jpg",
+	"preco" : 5.50
+	},
+	{
+	"id" : 2,
+	"produto" : "Pizza",
+	"imagem" : "pizza.png",
+	"preco" : 4.00
+	},
+	{
+	"id" : 3,
+	"produto" : "Pão de Queijo",
+	"imagem" : "pao-de-queijo.jpeg",
+	"preco" : 2.80
+	},
+	{
+	"id" : 4,
+	"produto" : "Refrigerante",
+	"imagem" : "refrigerante.jpg",
+	"preco" : 4.50
+	},
+	{
+	"id" : 5,
+	"produto" : "Toddynho",
+	"imagem" : "toddynho.jpg",
+	"preco" : 3.50
+	},
+	{
+	"id" : 6,
+	"produto" : "Mate Limão",
+	"imagem" : "mate-limao.png",
+	"preco" : 4.00
+	}
+]

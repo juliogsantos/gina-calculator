@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style type="text/css">
+	img{
+		width: 150px;
+		height: 100px;
+	}
+</style>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<body>
+<div ng-app="app" ng-controller="mainCtrl">
+<div class="container">
+   <div class="row">
+     <div class="col-lg-3" ng-repeat="x in lista">
+       <div class="card" >
+       	 <div class="card-header">{{x.id}}# {{x.produto}}</div>
+         <div class="card-body"><img src="img/{{x.imagem}}"></div>
+         <div class="card-footer">
+          <div class="row">
+	          <div class="col-lg-4">{{x.preco | currency : "R$ " : 2}}</div>
+            <div class="col-lg-4"><button class="btn btn-lg" ng-click="addProduto(x)">+</button></div>
+            <div class="col-lg-4"><h3>{{contaProduto(x)}}</h3></div>
+          </div>
+     	 </div>
+       </div>
+     </div>
+   </div>
+   <div class="navbar navbar-fixed-bottom">
+	   <div class="row">
+		   	<div class="col-lg-6">
+		   		<h1 >{{total | currency : "R$ " : 2}}</h1>
+         </div>
+         <div class="col-lg-6">
+          <h1 >{{printaVenda()}}</h1>
+        </div>
+	   </div>
+   </div>
+
+ </div> 
+</div>
+
+<script>
+
+var app = angular.module('app', []);
+
+  app.controller('mainCtrl', function($scope, $http){
+
+    $scope.lista = [];
+    $scope.total = 0;
+    $scope.venda = [];
+    $scope.produtos = [];
+
+    $scope.listar = function () {
+      $http.get("json/produtos.json").then(function(res){
+      	console.log("entrou na função");
+        $scope.lista = res.data;
+      });
+    }
+    $scope.addProduto = function(produto){
+      $scope.venda.push(produto);
+      $scope.soma(produto.preco);
+    }
+    $scope.soma = function(valor){
+    	$scope.total = $scope.total + valor;
+    }
+    $scope.printaVenda = function(){
+      return $scope.venda.length;
+    }
+    $scope.contaProduto = function(produto){
+      
+      $scope.venda.filter(function(produto){
+      	console.log($scope.venda[produto]);
+        console.log("filter");
+        return produto.produto == $scope.venda[produto];
+      }).length;                 
+    }
+    $scope.listar();
+  });
+</script>
+
+</body>
+</html>
